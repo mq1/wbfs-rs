@@ -28,6 +28,8 @@ fn get_id_and_title(file: &mut File) -> Result<(String, String), ParseImageError
     file.read_exact(&mut title)?;
     let title = String::from_utf8(title.to_vec())?;
     let title = title.trim_matches(char::from(0)).to_string();
+    let title = title.replace(":", " -");
+    let title = title.replace("?", "");
 
     Ok((id, title))
 }
